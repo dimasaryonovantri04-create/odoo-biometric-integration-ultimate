@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_inherit_biometric_hr" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.biometric.hr</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="hr_attendance.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='attendance_settings']" position="after">
+                <div class="col-12 col-lg-6 o_setting_box" id="biometric_integration_settings">
+                    <div class="o_setting_left_pane"/>
+                    <div class="o_setting_right_pane">
+                        <span class="o_form_label">Biometric Integration</span>
+                        <div class="text-muted">
+                            Konfigurasi untuk integrasi mesin biometrik
+                        </div>
+                        <div class="content-group">
+                            <div class="row mt16">
+                                <label for="biometric_secret_key" string="Secret Key" class="col-lg-3 o_light_label"/>
+                                <field name="biometric_secret_key" class="col-lg-9"/>
+                            </div>
+                            <div class="row">
+                                <label for="biometric_timezone" string="Device Timezone" class="col-lg-3 o_light_label"/>
+                                <field name="biometric_timezone" class="col-lg-9" required="1"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

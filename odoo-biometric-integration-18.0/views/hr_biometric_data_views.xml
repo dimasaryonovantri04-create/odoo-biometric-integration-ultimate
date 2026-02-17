@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_biometric_data_view_tree" model="ir.ui.view">
+        <field name="name">hr.biometric.data.tree</field>
+        <field name="model">hr.biometric.data</field>
+        <field name="arch" type="xml">
+            <tree string="Biometric Data Logs" decoration-success="status == 'processed'" decoration-danger="status == 'error'" decoration-muted="status == 'pending'">
+                <field name="employee_id"/>
+                <field name="timestamp"/>
+                <field name="status"/>
+                <field name="attendance_id" optional="show"/>
+                <field name="error_message" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="hr_biometric_data_view_search" model="ir.ui.view">
+        <field name="name">hr.biometric.data.search</field>
+        <field name="model">hr.biometric.data</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="employee_id"/>
+                <field name="employee_barcode"/>
+                <filter string="Pending" name="filter_pending" domain="[('status', '=', 'pending')]"/>
+                <filter string="Error" name="filter_error" domain="[('status', '=', 'error')]"/>
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter string="Employee" name="group_by_employee" context="{'group_by': 'employee_id'}"/>
+                    <filter string="Status" name="group_by_status" context="{'group_by': 'status'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_hr_biometric_data" model="ir.actions.act_window">
+        <field name="name">Biometric Data Logs</field>
+        <field name="res_model">hr.biometric.data</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="hr_biometric_data_view_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No biometric data logs found yet.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_process_biometric_logs" model="ir.actions.server">
+        <field name="name">Process Selected Logs</field>
+        <field name="model_id" ref="model_hr_biometric_data"/>
+        <field name="binding_model_id" ref="model_hr_biometric_data"/>
+        <field name="state">code</field>
+        <field name="code">
+            if records:
+                records.action_process_logs()
+        </field>
+    </record>
+</odoo>

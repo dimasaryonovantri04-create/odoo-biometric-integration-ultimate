@@ -1,0 +1,21 @@
+<odoo>
+    <menuitem
+        id="menu_hr_biometric_root"
+        name="Biometric"
+        parent="hr_attendance.menu_hr_attendance_root"
+        sequence="90"/>
+
+    <menuitem
+        id="menu_hr_biometric_data_logs"
+        name="Data Logs"
+        parent="menu_hr_biometric_root"
+        action="action_hr_biometric_data"
+        sequence="10"/>
+
+    <menuitem
+        id="menu_hr_biometric_config"
+        name="Configuration"
+        parent="menu_hr_biometric_root"
+        sequence="100"
+        action="hr_attendance.hr_attendance_config_settings_action"/>
+</odoo>
